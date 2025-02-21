@@ -6,6 +6,7 @@ import Posts from './pages/Posts';
 import Reports from './pages/Reports';
 import Navbar from './components/Navbar';
 import Sidebar from './components/SideBar';
+import Login from './pages/Login';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
