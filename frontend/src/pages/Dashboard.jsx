@@ -4,7 +4,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState({ totalUsers: 0, totalPosts: 0, totalReports: 0 });
 
   useEffect(() => {
-    fetch('/api/admin/dashboard', { credentials: 'include' })
+    fetch('http://localhost:5001'+'/api/admin/dashboard', { credentials: 'include' })
       .then(res => res.json())
       .then(data => setStats(data))
       .catch(err => console.error(err));
