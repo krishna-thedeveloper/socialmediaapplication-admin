@@ -4,14 +4,14 @@ const Reports = () => {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetch('/api/admin/reports', { credentials: 'include' })
+    fetch('http://localhost:5001/api/admin/reports', { credentials: 'include' })
       .then(res => res.json())
       .then(data => setReports(data))
       .catch(err => console.error(err));
   }, []);
 
   const handleAction = (id, action) => {
-    fetch(`/api/admin/reports/${id}`, {
+    fetch(`http://localhost:5001/api/admin/reports/${id}`, {
       method: 'PUT',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -22,29 +22,48 @@ const Reports = () => {
   };
 
   return (
-    <div className="ml-64 p-5">
-      <h1 className="text-3xl font-bold">Reports</h1>
-      <table className="w-full mt-5 border">
-        <thead>
-          <tr className="bg-gray-800 text-white">
-            <th className="p-3">Reported Post</th>
-            <th className="p-3">Reported By</th>
-            <th className="p-3">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reports.map(report => (
-            <tr key={report._id} className="border-b">
-              <td className="p-3">{report.post?.text}</td>
-              <td className="p-3">{report.reportedBy?.username}</td>
-              <td className="p-3">
-                <button onClick={() => handleAction(report._id, 'delete')} className="bg-red-500 text-white px-3 py-1 rounded">Delete Post</button>
-                <button onClick={() => handleAction(report._id, 'ignore')} className="bg-gray-500 text-white px-3 py-1 ml-2 rounded">Ignore</button>
-              </td>
+    <div className="ml-64 p-6 text-white">
+      <h1 className="text-3xl font-bold mb-6">Reports</h1>
+
+      <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
+        <table className="w-full border border-gray-700">
+          <thead>
+            <tr className="bg-gray-700 text-white">
+              <th className="p-3 text-left">Reported Post</th>
+              <th className="p-3 text-left">Reported By</th>
+              <th className="p-3 text-center">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {reports.length > 0 ? (
+              reports.map(report => (
+                <tr key={report._id} className="border-b border-gray-600">
+                  <td className="p-3">{report.post?.text || "Post Deleted"}</td>
+                  <td className="p-3">{report.reportedBy?.username || "Unknown"}</td>
+                  <td className="p-3 text-center">
+                    <button
+                      onClick={() => handleAction(report._id, 'delete')}
+                      className="bg-red-500 text-white px-3 py-1 rounded mr-2"
+                    >
+                      Delete Post
+                    </button>
+                    <button
+                      onClick={() => handleAction(report._id, 'ignore')}
+                      className="bg-gray-500 text-white px-3 py-1 rounded"
+                    >
+                      Ignore
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="p-5 text-center text-gray-400">No reports found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

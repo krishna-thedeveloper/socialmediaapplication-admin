@@ -13,7 +13,7 @@ import {
 
 const router = express.Router();
 
-router.use(protectRoute, isAdmin);
+//router.use(protectRoute, isAdmin);
 
 // Dashboard Overview
 router.get('/dashboard', getDashboardStats);

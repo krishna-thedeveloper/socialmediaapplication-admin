@@ -4,14 +4,14 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import adminRoutes from './routes/admin.route.js';
-
+import authRoutes from './routes/auth.route.js'
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173',  
+app.use(cors({ origin: 'http://localhost:5172',  
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true  }));
@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
+app.use('/api/auth',authRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Database Connection

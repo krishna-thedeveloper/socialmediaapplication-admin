@@ -4,7 +4,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('/api/admin/users', { credentials: 'include' })
+    fetch('http://localhost:5001'+'/api/admin/users', { credentials: 'include' })
       .then(res => res.json())
       .then(data => setUsers(data))
       .catch(err => console.error(err));

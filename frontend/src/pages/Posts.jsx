@@ -4,14 +4,14 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('/api/admin/posts', { credentials: 'include' })
+    fetch('http://localhost:5001'+'/api/admin/posts', { credentials: 'include' })
       .then(res => res.json())
       .then(data => setPosts(data))
       .catch(err => console.error(err));
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`/api/admin/posts/${id}`, {
+    fetch('http://localhost:5001'+`/api/admin/posts/${id}`, {
       method: 'DELETE',
       credentials: 'include',
     })

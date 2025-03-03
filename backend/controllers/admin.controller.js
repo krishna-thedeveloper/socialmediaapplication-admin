@@ -55,9 +55,10 @@ export const deletePost = async (req, res) => {
 
 export const getReports = async (req, res) => {
     try {
-        const reports = await Report.find().populate('post', 'text').populate('reportedBy', 'username');
+        const reports = await Report.find();
         res.status(200).json(reports);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };

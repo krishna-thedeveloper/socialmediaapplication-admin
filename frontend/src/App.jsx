@@ -23,7 +23,7 @@ function App() {
     <Router>
       <div className="flex">
         {isAuthenticated && <Sidebar />}
-        <div className={isAuthenticated ? "flex-1 ml-64" : "flex-1"}>
+        <div className={isAuthenticated ? "flex-1 ml-50" : "flex-1"}>
           {isAuthenticated && <Navbar />}
           <Routes>
             <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
